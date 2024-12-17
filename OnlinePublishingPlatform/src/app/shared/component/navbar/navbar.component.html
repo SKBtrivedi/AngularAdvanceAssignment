@@ -1,0 +1,34 @@
+<header class="navbar">
+    <nav class="navbar-container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <a routerLink="/">📰 Online Publishing Platform</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a routerLink="/" class="nav-item" routerLinkActive="active-tab"  [routerLinkActiveOptions]="{ exact: true }"  >Home</a>
+            <a routerLink="/author-directory" class="nav-item" routerLinkActive="active-tab">Authors</a>
+            <a routerLink="/new-post" class="nav-item" *ngIf="isLoggedIn" routerLinkActive="active-tab">New Post</a>
+            <a routerLink="/my-posts" class="nav-item" *ngIf="isLoggedIn" routerLinkActive="active-tab">My Posts</a>
+            <ng-container *ngIf="!isLoggedIn; else profileSection">
+                <a routerLink="/login" class="nav-item login-btn">Login</a>
+            </ng-container>
+        </div>
+
+        <!-- Profile Dropdown Section -->
+        <ng-template #profileSection>
+            <div class="profile-dropdown">
+                <button class="profile-btn">
+                    <img [src]="userProfilePic || '/assets/default-avatar.png'" alt="Profile Picture" />
+                    <span>{{ userName }}</span>
+                    <i class="dropdown-icon">▼</i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a routerLink="/profile">View Profile</a></li>
+                    <li><a (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </ng-template>
+    </nav>
+</header>

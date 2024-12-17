@@ -1,0 +1,20 @@
+<div class="author-directory">
+    <h2>Author Directory</h2>
+    <div class="search-box">
+        <input type="text" placeholder="Search authors by name..." [(ngModel)]="searchTerm" (input)="filterAuthors()" />
+    </div>
+    <div class="author-grid">
+        <div *ngFor="let author of filteredAuthors" class="author-card">
+          <img [src]="author.profilePicture" alt="{{ author.name }}" class="author-image" />
+          <div class="author-info">
+            <h3>{{ author.name }}</h3>
+            <p class="author-bio">{{ author.bio }}</p>
+            <p *ngFor="let articleID of author.articles">
+              <button routerLink="/article/{{ articleID }}" class="view-articles-button">
+                View Article
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+</div>

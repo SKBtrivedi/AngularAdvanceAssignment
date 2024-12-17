@@ -1,0 +1,156 @@
+<div class="article-details-container" *ngIf="article; else notFound">
+  <img [src]="article.thumbnail" alt="Article Thumbnail" class="article-image" />
+  <h1>{{ article.title }}</h1>
+  <p class="author">By {{ article.author }} | {{ article.publishDate | date }}</p>
+  <p class="category">Category: {{ article.category | titlecase }}</p>
+  <p class="description">{{ article.description }}</p>
+  <p class="content" [innerHTML]="article.content" >{{ article.content }}</p>
+
+  <!-- Author Bio -->
+  <div class="author-section">
+    <h3>About the Author</h3>
+    <p>{{ article.authorBio }}</p>
+
+    <h4>Other Articles by {{ article.author }}</h4>
+    <ul>
+      <li *ngFor="let otherArticle of otherArticlesByAuthor">
+        <!-- Ensure this is clickable -->
+        <button class="link-button" (click)="navigateToArticle(otherArticle.id)">
+          {{ otherArticle.title }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="comments-section">
+    <h3>Comments</h3>
+  
+    <!-- Sorting Options -->
+    <div class="sort-options">
+      <label>Sort by:</label>
+      <select [(ngModel)]="sortOption" (change)="sortComments()">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="mostLiked">Most Liked</option>
+      </select>
+    </div>
+  
+    <!-- Add Comment Form -->
+    <div class="comment-form">
+      <input
+        type="text"
+        [(ngModel)]="commentAuthor"
+        placeholder="Your Name (optional)"
+        class="comment-author-input"
+      />
+      <textarea
+        [(ngModel)]="newComment"
+        placeholder="Write your comment here..."
+        class="comment-input"
+      ></textarea>
+      <button (click)="addComment()">Post Comment</button>
+    </div>
+  
+    <!-- Display Comments -->
+    <div class="comment-list" *ngIf="comments.length > 0">
+      <div *ngFor="let comment of comments" class="comment">
+        <!-- Comment Header -->
+        <div class="comment-header">
+          <span class="comment-author">{{ comment.author }}</span>
+          <span class="comment-date">{{ comment.date | date: 'short' }}</span>
+        </div>
+  
+        <!-- Comment Content -->
+        <p class="comment-text">{{ comment.text }}</p>
+  
+        <!-- Comment Actions -->
+        <div class="comment-actions">
+          <button (click)="likeComment(comment.id)">Like ({{ comment.likes }})</button>
+          <button (click)="toggleReplyBox(comment.id)">Reply</button>
+        </div>
+  
+        <!-- Reply Box -->
+        <div class="reply-box" *ngIf="comment.showReplyBox">
+          <textarea
+            [(ngModel)]="comment.newReply"
+            placeholder="Write your reply..."
+            class="reply-input"
+          ></textarea>
+          <button (click)="addReply(comment.id, comment.newReply ?? '')">Post Reply</button>
+          <button class="cancel-button" (click)="toggleReplyBox(comment.id)">Cancel</button>
+        </div>
+  
+        <!-- Nested Replies -->
+        <div class="replies" *ngIf="comment.replies.length > 0">
+          <div *ngFor="let reply of comment.replies" class="reply">
+            <!-- Reply Header -->
+            <div class="reply-header">
+              <span class="reply-author">{{ reply.author }}</span>
+              <span class="reply-date">{{ reply.date | date: 'short' }}</span>
+            </div>
+  
+            <!-- Reply Content -->
+            <p class="reply-text">{{ reply.text }}</p>
+  
+            <!-- Reply Actions -->
+            <div class="reply-actions">
+              <button (click)="likeComment(reply.id)">Like ({{ reply.likes }})</button>
+              <button (click)="toggleReplyBox(reply.id)">Reply</button>
+            </div>
+  
+            <!-- Recursive Nested Reply Box -->
+            <div class="reply-box" *ngIf="reply.showReplyBox">
+              <textarea
+                [(ngModel)]="reply.newReply"
+                placeholder="Write your reply..."
+                class="reply-input"
+              ></textarea>
+              <button (click)="addReply(reply.id, reply.newReply ?? '')">Post Reply</button>
+              <button class="cancel-button" (click)="toggleReplyBox(reply.id)">Cancel</button>
+            </div>
+  
+            <!-- Recursive Replies -->
+            <div class="nested-replies" *ngIf="reply.replies.length > 0">
+              <ng-container *ngFor="let nestedReply of reply.replies">
+                <div class="reply">
+                  <div class="reply-header">
+                    <span class="reply-author">{{ nestedReply.author }}</span>
+                    <span class="reply-date">{{ nestedReply.date | date: 'short' }}</span>
+                  </div>
+                  <p class="reply-text">{{ nestedReply.text }}</p>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="comments.length === 0" class="no-comments">No comments yet. Be the first to comment!</p>
+  </div>
+  
+  <!-- Related Articles -->
+  <div class="related-articles">
+    <h3>Related Articles</h3>
+    <div class="related-articles-grid">
+      <div *ngFor="let relatedArticle of relatedArticles" class="related-article-card"
+        (click)="navigateToArticle(relatedArticle.id)">
+        <img [src]="relatedArticle.thumbnail" alt="Article Thumbnail" />
+        <div class="content">
+          <h4>{{ relatedArticle.title }}</h4>
+          <p class="author">By {{ relatedArticle.author }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Go Back Button -->
+  <button class="back-button" routerLink="/">Go Back to Home</button>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <h2>Article Not Found</h2>
+    <p>The article you are looking for does not exist.</p>
+    <button class="back-button" routerLink="/">Go Back to Home</button>
+  </div>
+</ng-template>

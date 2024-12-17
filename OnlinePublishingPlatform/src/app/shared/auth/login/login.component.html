@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <h1>Welcome Back!</h1>
+  <p>Sign in to continue</p>
+
+  <button class="social-btn google-btn" (click)="loginWithGoogle()">
+    <i class="fab fa-google"></i> Sign in with Google
+  </button>
+  <button class="social-btn github-btn" (click)="loginWithGitHub()">
+    <i class="fab fa-github"></i> Sign in with GitHub
+  </button>
+  
+  <p>Don’t have an account? <a routerLink="/register">Register</a></p>
+</div>

@@ -1,0 +1,123 @@
+.navbar {
+    background-color: #004080; /* Enterprise-level blue */
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .navbar-container {
+       display: contents;
+      justify-content: space-between; /* Space between logo and links */
+      align-items: center;
+  
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+  
+        a {
+          color: white;
+          text-decoration: none;
+  
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+  
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-right: 20px; /* Creates space from the profile dropdown */
+  
+        .nav-item {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          padding: 5px 10px;
+  
+          &:hover {
+            background-color: #0056b3; /* Hover effect */
+            border-radius: 5px;
+          }
+          
+          &.active-tab {
+            background-color: #0056b3; /* Hover effect */
+            border-radius: 5px;
+            // border-bottom: 2px solid #ffd500; /* Add a bottom border for active tab */
+          }
+        }
+  
+        .login-btn {
+          background-color: #ffa500;
+          color: #004080;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          font-weight: bold;
+  
+          &:hover {
+            background-color: #ff8800;
+          }
+        }
+      }
+  
+      .profile-dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+  
+        .profile-btn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+  
+          img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+          }
+  
+          .dropdown-icon {
+            font-size: 12px;
+          }
+        }
+  
+        .dropdown-menu {
+          position: absolute;
+          top: 40px;
+          right: 0;
+          background: white;
+          color: #333;
+          list-style: none;
+          padding: 10px 0;
+          border-radius: 5px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: none;
+  
+          li {
+            padding: 10px 20px;
+            cursor: pointer;
+  
+            a {
+              color: #333;
+              text-decoration: none;
+  
+              &:hover {
+                color: #004080;
+              }
+            }
+          }
+        }
+  
+        &:hover .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,119 @@
+.new-post-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+  
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+  
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+  
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+  
+        .tag {
+          background-color: #4285f4;
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          display: inline-flex;
+          align-items: center;
+  
+          button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
+          }
+        }
+  
+        input {
+          flex-grow: 1;
+          padding: 5px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+      }
+  
+      .popular-tags {
+        display: flex;
+        gap: 10px;
+  
+        .popular-tag {
+          background-color: #f1f1f1;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+  
+          &:hover {
+            background-color: #ddd;
+          }
+        }
+      }
+    }
+  
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      
+        /* Specific styles for each button */
+        button:nth-child(1) {
+          background-color: #ff9800; /* Save as Draft */
+        }
+      
+        button:nth-child(2) {
+          background-color: #4caf50; /* Publish */
+        }
+      
+        button:nth-child(3) {
+          background-color: #2196f3; /* Preview */
+        }
+      
+        .reset-button {
+          background-color: #f44336; /* Reset */
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+      
+  }
+  

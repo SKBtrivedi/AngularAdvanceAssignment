@@ -1,0 +1,71 @@
+<div class="home-container">
+  <!-- Featured Articles Section -->
+  <section class="featured-articles">
+    <h2>Featured Articles</h2>
+    <div id="featuredArticlesCarousel" class="carousel slide" data-bs-ride="carousel">
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        <button *ngFor="let article of featuredArticles; let i = index" type="button"
+          data-bs-target="#featuredArticlesCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+          aria-current="i === 0 ? 'true' : ''" [attr.aria-label]="'Slide ' + (i + 1)"></button>
+      </div>
+
+      <!-- Carousel Items -->
+      <div class="carousel-inner">
+        <div *ngFor="let article of featuredArticles; let i = index" class="carousel-item" [class.active]="i === 0"
+          [routerLink]="['/article', article.id]">
+          <img [src]="article.thumbnail" class="d-block w-100" alt="Article Thumbnail" />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ article.title }}</h5>
+            <p>{{ article.description }}</p>
+            <p class="author">By {{ article.author }} | {{ article.publishDate | date }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#featuredArticlesCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#featuredArticlesCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- All Articles Section -->
+  <section class="article-list">
+    <h2>All Articles</h2>
+    <input type="text" placeholder="Search articles or authors..." [(ngModel)]="searchTerm"
+      (input)="filterArticles()" />
+
+    <div class="sort-options">
+      <button (click)="sortBy('all')">All</button>
+      <button (click)="sortBy('latest')">Latest</button>
+      <button (click)="sortBy('popular')">Most Popular</button>
+      <button (click)="sortBy('editor')">Editor's Pick</button>
+    </div>
+
+    <div class="articles-grid">
+      <div *ngFor="let article of displayedArticles" class="article-card" [routerLink]="['/article', article.id]">
+        <img [src]="article.thumbnail" alt="Article Thumbnail" />
+        <div class="content">
+          <h3>{{ article.title }}</h3>
+          <p class="author">By {{ article.author }} | {{ article.publishDate | date }}</p>
+          <p class="description">{{ article.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,136 @@
+.my-posts-container {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .filter-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      color: #333;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #4285f4;
+        color: white;
+      }
+
+      &.active {
+        background-color: #4285f4;
+        color: white;
+      }
+    }
+  }
+
+  .articles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .article-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .article-thumbnail {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .article-content {
+      padding: 15px;
+
+      .article-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .tag {
+        display: inline-block;
+        margin-right: 5px;
+        padding: 3px 8px;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .draft {
+        color: #ff9800;
+        font-weight: bold;
+      }
+
+      .published {
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      .article-content-preview {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+        max-height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.publish-button {
+          background-color: #4caf50;
+          color: white;
+
+          &:hover {
+            background-color: #388e3c;
+          }
+        }
+
+        &.delete-button {
+          background-color: #f44336;
+          color: white;
+
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+    }
+  }
+}

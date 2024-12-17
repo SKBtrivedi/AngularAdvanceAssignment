@@ -1,0 +1,47 @@
+<div class="my-posts-container">
+  <h2 class="title">My Posts</h2>
+
+  <!-- Filter Options -->
+  <div class="filter-options">
+    <button [class.active]="filterOption === 'all'" (click)="filterOption = 'all'; filterArticles()">All</button>
+    <button [class.active]="filterOption === 'drafts'" (click)="filterOption = 'drafts'; filterArticles()">Drafts</button>
+    <button [class.active]="filterOption === 'published'" (click)="filterOption = 'published'; filterArticles()">Published</button>
+  </div>
+
+  <!-- Articles List -->
+  <div class="articles-list">
+    <div *ngFor="let article of displayedArticles; let i = index" class="article-card">
+      <img [src]="article.thumbnail" alt="Thumbnail" class="article-thumbnail" />
+      <div class="article-content">
+        <h3 class="article-title">{{ article.title }}</h3>
+        <p><strong>Tags:</strong> 
+          <span *ngFor="let tag of article.tags" class="tag">{{ tag }}</span>
+        </p>
+        <p><strong>Status:</strong> 
+          <span [class.draft]="article.draft" [class.published]="!article.draft">
+            {{ article.draft ? 'Draft' : 'Published' }}
+          </span>
+        </p>
+        <p><strong>Scheduled Date:</strong> {{ article.scheduledDate || 'N/A' }}</p>
+        <p><strong>Description:</strong> {{ article.description }}</p>
+        <div [innerHTML]="article.content" class="article-content-preview"></div>
+
+        <!-- Buttons -->
+        <div class="article-actions">
+          <button 
+            class="publish-button" 
+            *ngIf="article.draft" 
+            (click)="publishDraft(i)">
+            Publish
+          </button>
+          <button 
+            class="delete-button" 
+            *ngIf="article.draft" 
+            (click)="deleteDraft(i)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
